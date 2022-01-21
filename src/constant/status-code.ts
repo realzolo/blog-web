@@ -1,0 +1,6 @@
+export const HTTPStatusCode = {
+    SUCCESS: 10000,
+    FAILURE: 10001,
+    NO_PERMISSION: 10002,
+    NET_ERROR: 100010
+}

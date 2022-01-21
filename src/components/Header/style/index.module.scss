@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6rem;
+  background: #FFFFFF;
+  border-radius: .5rem;
+  padding: 0 1rem;
+
+  .right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .signature_wrapper{
+      display: flex;
+      flex-direction: column;
+      text-align: end;
+      margin: 0 1rem;
+    }
+  }
+}
+
+
+
+
+
+
+
+
