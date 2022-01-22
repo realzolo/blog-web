@@ -1,50 +1,53 @@
-import React, {Fragment, PropsWithChildren, ReactNode, useState} from "react";
-import {matchPath, NavLink} from "react-router-dom";
-import {Breadcrumb, Layout, Menu} from "@arco-design/web-react";
-import {IRoute, navRoutes} from "../../router";
-import {generateRoutes} from "../../utils/generate-routes";
+import React, {ReactNode, useEffect, useState} from "react";
+import {Outlet, NavLink, useLocation, useNavigate} from "react-router-dom";
+import {Layout, Menu} from "@arco-design/web-react";
+import {IRoute, routes} from "../../router";
 import Header from "../../components/Header";
 import styles from "./style/index.module.scss";
 
-const BreadcrumbItem = Breadcrumb.Item;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 
 const Sider = Layout.Sider;
 const Content = Layout.Content;
 
-const Dashboard: React.FC<PropsWithChildren<any>> = (props  ) => {
-    const {pathname} = props.location;
-    if (pathname === "/dashboard") props.history.replace("/dashboard/analysis")
-    const [collapsed, setCollapsed] = useState(false);
+const Dashboard: React.FC = () => {
+    const navRoutes = routes.filter(route => route.path === "/dashboard")[0]?.children;
+    const {pathname} = useLocation();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (pathname === "/dashboard") navigate("/dashboard/analysis");
+    })
+    const [collapsed, setCollapsed] = useState<boolean>(false);
     // 动态生成面包屑导航
-    const getBreadcrumb = (routeList: IRoute[]) => {
-        return (
-            <>
-                {
-                    routeList.map(route => {
-                        if (matchPath(pathname, {path: route.path}) !== null) {
-                            return (
-                                <Fragment key={route.path}>
-                                    <BreadcrumbItem>{route.title}</BreadcrumbItem>
-                                    {
-                                        route.children && getBreadcrumb(route.children)
-                                    }
-                                </Fragment>
-                            )
-                        }
-                        return null;
-                    })
-                }
-            </>
-        )
-    }
+    // const getBreadcrumb = (routes: IRoute[]) => {
+    //     return (
+    //         <>
+    //             {
+    //                 routes.map(route => {
+    //                     if (matchPath(pathname, route.path) !== null) {
+    //                         return (
+    //                             <Fragment key={route.path}>
+    //                                 <BreadcrumbItem>{route.title}</BreadcrumbItem>
+    //                                 {
+    //                                     route.children && getBreadcrumb(route.children)
+    //                                 }
+    //                             </Fragment>
+    //                         )
+    //                     }
+    //                     return null;
+    //                 })
+    //             }
+    //         </>
+    //     )
+    // }
     // 动态生成Menu列表
-    const getMenus = (routeList: IRoute[]): ReactNode => {
+    const getMenus = (routes: IRoute[] | undefined): ReactNode => {
+        if (!routes) return null;
         return (
             <>
                 {
-                    routeList?.map(route => {
+                    routes?.map(route => {
                         if (route.children) {
                             return (
                                 <SubMenu key={route.path} title={
@@ -60,7 +63,7 @@ const Dashboard: React.FC<PropsWithChildren<any>> = (props  ) => {
                         return (
                             <NavLink to={route.path} key={route.path}>
                                 <MenuItem key={route.path}>
-                                    {route.icon}{route.title}
+                                    <strong>{route.icon}{route.title}</strong>
                                 </MenuItem>
                             </NavLink>
                         )
@@ -72,15 +75,14 @@ const Dashboard: React.FC<PropsWithChildren<any>> = (props  ) => {
     return (
         <Layout className={styles.wrapper}>
             <Sider collapsed={collapsed} collapsible trigger={null} breakpoint='xl'>
-                <Menu defaultSelectedKeys={Array.of(pathname)}
-                      style={{width: '100%'}}>
+                <Menu defaultSelectedKeys={Array.of(pathname)} style={{width: '100%'}}>
                     {getMenus(navRoutes)}
                 </Menu>
             </Sider>
             <Layout className={styles.content_wrapper}>
                 <Header/>
                 <Content>
-                    {generateRoutes(navRoutes)}
+                    <Outlet/>
                 </Content>
             </Layout>
         </Layout>

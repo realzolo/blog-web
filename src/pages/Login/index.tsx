@@ -1,18 +1,18 @@
 import React, {PropsWithChildren, useState} from "react";
-import styles from "./style/index.module.scss";
+import {useDispatch} from "react-redux";
 import {Button, Card, Form, Input, Message} from "@arco-design/web-react";
 import {login} from "../../net";
 import {IResponse, IUserState, UserActionType} from "../../typings";
 import {HTTPStatusCode} from "../../constant/status-code";
-import {withRouter} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import styles from "./style/index.module.scss";
+import {useNavigate} from "react-router-dom";
 
 const FormItem = Form.Item;
 
-const Login: React.FC<PropsWithChildren<any>> = ({history}) => {
-    const [loading, setLoading] = useState(false);
-    // const userinfo = useSelector((state: ReduxState) => state.UserReducer.userinfo);
+const Login: React.FC<PropsWithChildren<any>> = () => {
+    const [loading, setLoading] = useState<boolean>(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [form] = Form.useForm();
     const doSubmit = async () => {
         const {username, password} = form.getFieldsValue();
@@ -29,7 +29,7 @@ const Login: React.FC<PropsWithChildren<any>> = ({history}) => {
             case HTTPStatusCode.SUCCESS:
                 dispatch({type: UserActionType.ADD_USER, payload: data as IUserState})
                 Message.success("登录成功!");
-                history.push("/dashboard");
+                navigate("/dashboard", {replace: true});
                 break;
             case HTTPStatusCode.FAILURE:
                 Message.error("登录失败! 用户名或密码错误!");
@@ -68,4 +68,4 @@ const Login: React.FC<PropsWithChildren<any>> = ({history}) => {
         </div>
     )
 }
-export default withRouter(Login);
+export default Login;

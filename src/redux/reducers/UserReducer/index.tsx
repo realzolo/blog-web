@@ -1,5 +1,5 @@
 import {IUserAction, IUserState, UserActionType} from "../../../typings";
-import LocalStorageUtil from "../../../utils/local-storage";
+import LocalStorageUtil from "../../../utils/storage";
 
 const initialState: IUserState = {
     userinfo: LocalStorageUtil.getItem("USER_INFO")

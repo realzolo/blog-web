@@ -1,10 +1,11 @@
-import React, {ComponentType, ReactNode} from "react";
+import React, {ReactElement, ReactNode} from "react";
 import {IconBytedanceColor, IconLarkColor, IconTiktokColor, IconXiguaColor} from "@arco-design/web-react/icon";
 import Manage from "../pages/Manage";
 import Setting from "../pages/Setting";
 import Analysis from "../pages/Analysis";
 import Publish from "../pages/Publish";
 import Profile from "../pages/Profile";
+import Dashboard from "../pages/Dashboard";
 
 const Home = React.lazy(() => import("../pages/Home"));
 const Login = React.lazy(() => import("../pages/Login"));
@@ -12,10 +13,9 @@ const Login = React.lazy(() => import("../pages/Login"));
 export interface IRoute {
     title: string,
     path: string,
-    exact?: boolean,
-    strict?: boolean,
+    index?: boolean,
     icon?: ReactNode,
-    component?: ComponentType,
+    element?: ReactElement,
     children?: IRoute[]
 }
 
@@ -23,55 +23,91 @@ export const routes: IRoute[] = [
     {
         title: "Home",
         path: "/",
-        exact: true,
-        component: Home
+        element: <Home/>
     },
     {
         title: "Login",
         path: "/login",
-        exact: true,
-        component: Login
+        element: <Login/>
+    },
+    {
+        title: "Dashboard",
+        path: "/dashboard",
+        element: <Dashboard/>,
+        children: [
+            {
+                title: "数据分析",
+                index: true,  // 不生效
+                path: "analysis",
+                icon: <IconBytedanceColor/>,
+                element: <Analysis/>
+            },
+            {
+                title: "文章管理",
+                path: "article",
+                icon: <IconTiktokColor/>,
+                element: <Manage/>
+            },
+            {
+                title: "发布文章",
+                path: "publish",
+                icon: <IconXiguaColor/>,
+                element: <Publish/>
+            },
+            {
+                title: "个人信息",
+                path: "profile",
+                icon: <IconXiguaColor/>,
+                element: <Profile/>
+            },
+            {
+                title: "网站管理",
+                path: "setting",
+                icon: <IconLarkColor/>,
+                element: <Setting/>
+            }
+        ]
     }
 ]
 
 export const navRoutes: IRoute[] = [
     {
-        title: "数据分析",
-        path: "/dashboard/analysis",
-        icon: <IconBytedanceColor/>,
-        component: Analysis
-    },
-    {
-        title: "文章管理",
-        path: "/dashboard/article",
-        icon: <IconTiktokColor/>,
-        exact: true,
-        strict: true,
-        component: Manage
-    },
-    {
-        title: "发布文章",
-        path: "/dashboard/publish",
-        icon: <IconTiktokColor/>,
-        exact: true,
-        strict: true,
-        component: Publish
-    },
-    {
-        title: "个人信息",
-        path: "/dashboard/profile",
-        icon: <IconTiktokColor/>,
-        exact: true,
-        strict: true,
-        component: Profile
-    },
-    {
-        title: "网站管理",
-        path: "/dashboard/setting",
-        exact: true,
-        strict: true,
-        icon: <IconLarkColor/>,
-        component: Setting
+        title: "Dashboard",
+        path: "/dashboard",
+        element: <Dashboard/>,
+        children: [
+            {
+                title: "数据分析",
+                path: "/analysis",
+                // index: true,
+                icon: <IconBytedanceColor/>,
+                element: <Analysis/>
+            },
+            {
+                title: "文章管理",
+                path: "/article",
+                icon: <IconTiktokColor/>,
+                element: <Manage/>
+            },
+            {
+                title: "发布文章",
+                path: "/publish",
+                icon: <IconXiguaColor/>,
+                element: <Publish/>
+            },
+            {
+                title: "个人信息",
+                path: "/profile",
+                icon: <IconXiguaColor/>,
+                element: <Profile/>
+            },
+            {
+                title: "网站管理",
+                path: "/setting",
+                icon: <IconLarkColor/>,
+                element: <Setting/>
+            }
+        ]
     }
 ]
 

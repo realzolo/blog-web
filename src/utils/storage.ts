@@ -1,4 +1,4 @@
-const LocalStorageUtil = {
+const storage = {
     setItem(key: string, value: any) {
         localStorage.setItem(key, JSON.stringify(value));
     },
@@ -9,4 +9,4 @@ const LocalStorageUtil = {
         localStorage.removeItem(key);
     }
 }
-export default LocalStorageUtil;
+export default storage;

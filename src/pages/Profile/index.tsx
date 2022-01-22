@@ -16,7 +16,9 @@ const Profile: React.FC = () => {
     const [v2, setV2] = useState<boolean>(false);
     const [v3, setV3] = useState<boolean>(false);
     const [v4, setV4] = useState<boolean>(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [v5, setV5] = useState<boolean>(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [v6, setV6] = useState<boolean>(false);
     // 修改信息
     const doChangeUserInfo = () => {
