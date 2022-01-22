@@ -1,0 +1,41 @@
+.wrapper {
+  // 标题
+  .headline_wrapper{
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+    font-size: 1.6rem;
+    border-bottom: 1px solid rebeccapurple;
+  }
+  // 分类
+  .categories_wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 1.5rem;
+    column-gap: 1.5rem;
+    margin: 1.5rem 0;
+
+    img {
+      width: 100%;
+      border-radius: .5rem;
+    }
+
+    .category_item {
+      position: relative;
+
+      .category_item_name {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #FFFFFF;
+        background: rgba(0, 0, 0, .4);
+        border-radius: .5rem;
+      }
+    }
+  }
+}

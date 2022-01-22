@@ -1,0 +1,116 @@
+.wrapper {
+    display: flex;
+    width: 100vw;
+    height: 6rem;
+    box-shadow: 0 .2rem .5rem 0 rgb(0 0 0 / 15%);
+    -webkit-box-shadow: 0 .2rem .5rem 0 rgb(0 0 0 / 15%);
+    background: rgb(255, 255, 255);
+    z-index: 2;
+    top: 0;
+    transition: all .5s;
+    position: absolute;
+    line-height: 6rem;
+}
+
+.content_wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5rem;
+    width: 100%;
+}
+
+.left_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo_wrapper, .menu_wrapper {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.logo_wrapper {
+    max-width: 13rem;
+    margin-right: 1rem;
+}
+
+.logo_wrapper img {
+    width: 100%;
+}
+
+.left_wrapper > .menu_wrapper > a {
+    padding: 0 1.4rem;
+    font-size: 1.5rem;
+    color: var(--default-light-back);
+    font-weight: 500;
+    position: relative;
+}
+
+.right_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.right_wrapper .search_input {
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+    outline-color: var(--main-font-color);
+}
+
+.right_wrapper .search_button {
+    padding: .8rem 1rem;
+    z-index: 9999;
+}
+
+.right_wrapper .search_button:hover {
+    color: var(--main-font-color);
+    /*cursor: pointer;*/
+}
+
+.fixed {
+    position: fixed;
+}
+
+.activate {
+    color: var(--main-font-color) !important;
+}
+
+.menu_wrapper > a::after {
+    position: absolute;
+    height: .3rem;
+    background: var(--main-font-color) !important;
+    border-radius: .6rem .6rem 0 0;
+    content: "";
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    /*transition: opacity .5s, transform .5s, -webkit-transform .5s;*/
+}
+
+.activate::after {
+    opacity: 1 !important;
+    transform: scaleX(1);
+}
+
+/* 超小屏幕 */
+@media (max-width: 576px) {
+    .menu_wrapper > a {
+        padding: 0 1rem !important;
+    }
+}
+
+/* 小屏幕 */
+@media (max-width: 768px) {
+    .right_wrapper {
+        display: none;
+    }
+}
+@media (max-width: 1340px) {
+    .content_wrapper{
+        margin: 0 1rem;
+    }
+}

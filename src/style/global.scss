@@ -1,5 +1,13 @@
-@import "normalize.css";
+@import "reset-css";
 @import "@arco-design/web-react/dist/css/arco.css";;
 html {
   font-size: 62.5%;
+  background: aliceblue;
+}
+img{
+  vertical-align: middle;
+}
+// arco design
+.arco-card{
+  border-radius: .5rem;
 }

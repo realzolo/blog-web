@@ -9,12 +9,12 @@ export interface IResponse {
 export interface IUserInfo {
     nickname: string,
     username: string,
-    avatar: string,
-    wechat: string,
-    qq: string,
-    email: string,
-    bilibili: string,
-    github: string
+    avatar?: string,
+    wechat?: string,
+    qq?: string,
+    email?: string,
+    bilibili?: string,
+    github?: string
     // ...
 }
 

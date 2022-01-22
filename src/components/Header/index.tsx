@@ -4,7 +4,7 @@ import {Avatar, Badge, Dropdown, Menu} from "@arco-design/web-react";
 import {IconDesktop, IconLocation, IconNotification, IconWifi} from "@arco-design/web-react/icon";
 import styles from "./style/index.module.scss";
 import {useSelector} from "react-redux";
-import {ReduxState} from "../../redux";
+import {ReduxState} from "../../store";
 
 const Header: React.FC = () => {
     const userinfo = useSelector((state: ReduxState) => state.UserReducer.userinfo);

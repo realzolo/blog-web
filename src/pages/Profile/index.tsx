@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Avatar, Grid, Upload} from "@arco-design/web-react";
 import {useSelector} from "react-redux";
-import {ReduxState} from "../../redux";
+import {ReduxState} from "../../store";
 import styles from "./index.module.css"
 import UserInfoEditor from "./UserInfoEditor";
 import PasswordEditor from "./PasswordEditor";

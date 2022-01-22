@@ -1,14 +1,12 @@
 import {IUserAction, IUserState, UserActionType} from "../../../typings";
-import LocalStorageUtil from "../../../utils/storage";
 
 const initialState: IUserState = {
-    userinfo: LocalStorageUtil.getItem("USER_INFO")
+    userinfo: {nickname: "", username: ""}
 }
 const UserReducer = (state: IUserState = initialState, action: IUserAction) => {
     const {type, payload} = action;
     switch (type) {
         case UserActionType.ADD_USER:
-            LocalStorageUtil.setItem("USER_INFO", payload);
             return {
                 ...state,
                 userinfo: {...payload}
