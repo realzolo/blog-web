@@ -1,7 +1,7 @@
-import styles from "./style/Navigate.module.css";
 import {NavLink} from "react-router-dom";
 import {Input} from "@arco-design/web-react";
 import {IconSearch} from "@arco-design/web-react/icon";
+import styles from "./style/navigate.module.scss";
 
 const Navigate = () => {
     const menus = [
@@ -12,7 +12,8 @@ const Navigate = () => {
         {name: "关于", to: "/about"},
     ]
     return (
-        <div className={`${styles.wrapper} animate__animated`} id="header">
+        // <div className={`${styles.wrapper} animate__animated`} id="header">
+        <div className={`${styles.wrapper}`} id="header">
             <div className={styles.content_wrapper}>
                 <div className={styles.left_wrapper}>
                     <div className={styles.logo_wrapper}>

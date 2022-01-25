@@ -3,6 +3,14 @@
   .headline_wrapper {
     display: flex;
     align-items: center;
+    padding-bottom: 1rem;
+    font-size: 1.6rem;
+    border-bottom: 1px solid var(--zolo-colors-border);
+    font-weight: 500;
+
+    span {
+      padding-left: .7rem;
+    }
   }
 
   // 文章div
@@ -11,52 +19,97 @@
     .article_item {
       display: flex;
       height: 14rem;
+      margin: 1.5rem 0;
+      cursor: pointer;
+
+      &:not(&:last-child) {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--zolo-colors-border);
+      }
+
+      &:hover img {
+        transform: scale(1.1);
+      }
+
+      &:hover h2 {
+        color: var(--zolo-colors-theme);;
+      }
+
       // 封面
       .cover_wrapper {
-        width: 20rem;
-        border: 1px solid rebeccapurple;
+        width: 21rem;
+        height: 14rem;
         margin-right: 1rem;
-        img{
-          width: 100%;
+        overflow: hidden;
+        flex-shrink: 0;
+        border-radius: .4rem;
+        cursor: pointer;
+        position: relative;
+
+        svg {
+          position: absolute;
+          left: .8rem;
+          top: .8rem;
+          z-index: 999;
+        }
+
+        img {
           height: 100%;
+          width: 100%;
           object-fit: cover;
-          transition: opacity .35s;
+          transition: all .35s;
           margin-right: 0.8rem;
           border-radius: 0.4rem;
         }
       }
+
       // 文章信息
-      .metadata_wrapper{
-        border: 1px solid saddlebrown;
+      .metadata_wrapper {
         width: 100%;
         display: flex;
         flex-direction: column;
         // title
-        .title_wrapper{
+        .title_wrapper {
           font-size: 1.8rem;
           margin-bottom: 1rem;
-          color: var(--default-light-back);
+          color: var(--zolo-colors-black-800);
         }
+
         // intro
-        .intro_wrapper{
+        .intro_wrapper {
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
-          margin: 0;
           line-height: 1.5;
-          word-break: break-all;
-          height: 4rem;
+          color: var(--zolo-colors-black-700);
         }
+
         // 统计信息
-        .stats_wrapper{
+        .stats_wrapper {
           display: flex;
           justify-content: space-between;
           margin-top: auto;
           font-size: 1.3rem;
+
+          .stats > span:not(:last-child):after {
+            content: "/";
+            padding: 0 .6rem;
+            font-size: 1.3rem;
+          }
+
+          .icon {
+            display: flex;
+            align-items: center;
+
+            span {
+              padding: 0 .5rem;
+            }
+          }
         }
       }
     }
   }
+
 }

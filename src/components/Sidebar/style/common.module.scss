@@ -1,0 +1,12 @@
+.headline {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.headline_font {
+  padding: 0 .8rem;
+  //font-weight: 500;
+  color: var(--zolo-colors-black-800);
+  font-size: 1.5rem;
+}

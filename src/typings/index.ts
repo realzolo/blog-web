@@ -36,6 +36,8 @@ export interface IArticle {
     aid: number,
     title: string,
     category: string,
+    intro: string,
+    cover: string,
     content?: string,
     like_count: number,
     hit_count: number,
@@ -55,4 +57,16 @@ export interface IStats {
     daily_xxx: number,
     total_xxx: number,
     monthly_visits: any
+}
+
+// Timer
+export interface ITime {
+    hour_of_day: number,
+    per_hour_of_day: number,
+    day_of_week: number,
+    per_day_of_week: number,
+    day_of_month: number,
+    per_day_of_month: number,
+    month_of_year: number,
+    per_month_of_year: number
 }

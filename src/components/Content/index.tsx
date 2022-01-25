@@ -1,7 +1,7 @@
-import styles from "./style/index.module.scss"
 import HotCategory from "./HotCategory";
 import ArticleList from "./ArticleList";
 import {Card} from "@arco-design/web-react";
+import styles from "./style/index.module.scss"
 
 const Content = () => {
 

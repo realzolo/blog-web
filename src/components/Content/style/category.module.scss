@@ -5,7 +5,12 @@
     align-items: center;
     padding-bottom: 1rem;
     font-size: 1.6rem;
-    border-bottom: 1px solid rebeccapurple;
+    border-bottom: 1px solid var(--zolo-colors-border);
+    font-weight: 500;
+
+    span {
+      padding-left: .7rem;
+    }
   }
   // 分类
   .categories_wrapper {

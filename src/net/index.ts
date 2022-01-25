@@ -2,6 +2,8 @@ import {UserList} from "../mock/user";
 import {IResponse} from "../typings";
 import {HTTPStatusCode} from "../constant/status-code";
 import {stats_info} from "../mock/stats";
+import {articleList} from "../mock/article";
+import {time} from "../mock/time";
 
 export const login = (username: string, password: string): Promise<any> => {
     return new Promise(((resolve, reject) => {
@@ -33,6 +35,32 @@ export const getStatsInfo = (): Promise<any> => {
             data: {
                 code: HTTPStatusCode.SUCCESS,
                 data: stats_info,
+                message: "成功!"
+            } as IResponse
+        };
+        resolve(res);
+    }))
+}
+
+export const getArticles = (): Promise<any> => {
+    return new Promise(((resolve, reject) => {
+        const res = {
+            data: {
+                code: HTTPStatusCode.SUCCESS,
+                data: articleList,
+                message: "成功!"
+            } as IResponse
+        };
+        resolve(res);
+    }))
+}
+
+export const getTime = (): Promise<any> => {
+    return new Promise(((resolve, reject) => {
+        const res = {
+            data: {
+                code: HTTPStatusCode.SUCCESS,
+                data: time,
                 message: "成功!"
             } as IResponse
         };
