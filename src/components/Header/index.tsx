@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import {ReduxState} from "../../store";
 
 const Header: React.FC = () => {
-    const userinfo = useSelector((state: ReduxState) => state.UserReducer.userinfo);
+    const user = useSelector((state: ReduxState) => state.UserReducer.user);
     return (
         <div className={styles.wrapper}>
             <div className={styles.left}>
@@ -51,8 +51,8 @@ const Header: React.FC = () => {
                     </div>
                 </Dropdown>
                 <div className={styles.signature_wrapper}>
-                    <span>{userinfo.username}</span>
-                    <span>{userinfo.email}</span>
+                    <span>{user.username}</span>
+                    <span>{user.email}</span>
                 </div>
                 <Dropdown trigger={'click'} droplist={(
                     <Menu>
@@ -72,7 +72,7 @@ const Header: React.FC = () => {
                 )}
                 >
                     <Avatar>
-                        <img src={userinfo.avatar} alt={userinfo.username}/>
+                        <img src={user.avatar} alt={user.username}/>
                     </Avatar>
                 </Dropdown>
             </div>

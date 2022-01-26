@@ -24,7 +24,6 @@
   .avatar_wrapper {
     text-align: center;
     padding: 2rem 0;
-    margin-top: 4rem;
 
     .avatar {
       width: 7.2rem;
@@ -37,7 +36,7 @@
   .avatar_frame_wrapper {
     position: absolute;
     z-index: 999;
-    top: 9.5rem;
+    top: 10rem;
     left: 50%;
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);

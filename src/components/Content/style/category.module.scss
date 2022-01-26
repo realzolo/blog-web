@@ -1,6 +1,6 @@
 .wrapper {
   // 标题
-  .headline_wrapper{
+  .headline_wrapper {
     display: flex;
     align-items: center;
     padding-bottom: 1rem;
@@ -12,6 +12,7 @@
       padding-left: .7rem;
     }
   }
+
   // 分类
   .categories_wrapper {
     display: grid;
@@ -27,7 +28,11 @@
 
     .category_item {
       position: relative;
-
+      height: 12rem;
+      img{
+        width: 100%;
+        height: 100%;
+      }
       .category_item_name {
         position: absolute;
         top: 0;

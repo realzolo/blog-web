@@ -6,29 +6,27 @@ export interface IResponse {
 }
 
 // User model
-export interface IUserInfo {
+export interface IUser {
     nickname: string,
     username: string,
+    password?: string,
     avatar?: string,
+    background?: string,
     wechat?: string,
     qq?: string,
     email?: string,
     bilibili?: string,
-    github?: string
+    github?: string,
+    create_at?: string
     // ...
 }
 
-export interface IUserState {
-    userinfo: IUserInfo
-}
-
-export interface IUserAction {
-    type: UserActionType,
-    payload: IUserState
-}
-
-export enum UserActionType {
-    ADD_USER
+// Category Model
+export interface ICategory {
+    cid: number,
+    name: string,
+    cover: string,
+    // ...
 }
 
 // Article model
@@ -41,6 +39,7 @@ export interface IArticle {
     content?: string,
     like_count: number,
     hit_count: number,
+    comment_count: number,
     created_at: string,
     modified_at: string,
     state: boolean
@@ -48,8 +47,8 @@ export interface IArticle {
 
 // Analysis Stats
 export interface IStats {
-    daily_visits: number,
-    total_visits: number,
+    daily_hits: number,
+    total_hits: number,
     daily_likes: number,
     total_likes: number,
     daily_comments: number,
@@ -59,7 +58,7 @@ export interface IStats {
     monthly_visits: any
 }
 
-// Timer
+// Timer Model
 export interface ITime {
     hour_of_day: number,
     per_hour_of_day: number,
@@ -69,4 +68,18 @@ export interface ITime {
     per_day_of_month: number,
     month_of_year: number,
     per_month_of_year: number
+}
+
+// UserReducer Model
+export interface IUserState {
+    user: IUser
+}
+
+export interface IUserAction {
+    type: UserActionType,
+    payload: IUserState
+}
+
+export enum UserActionType {
+    ADD_USER
 }

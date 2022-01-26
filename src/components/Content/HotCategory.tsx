@@ -1,27 +1,23 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import styles from "./style/category.module.scss";
+import {ICategory, IResponse} from "../../typings";
+import {getCategories} from "../../net/fake";
 
 const HotCategory = () => {
-    const [categories, setCategories] = useState(
-        [
-            {
-                name: "Undetermined",
-                cover: "https://image.onezol.com/img/R18.08.13.png"
-            },
-            {
-                name: "Undetermined",
-                cover: "https://image.onezol.com/img/R18.08.13.png"
-            },
-            {
-                name: "Undetermined",
-                cover: "https://image.onezol.com/img/R18.08.13.png"
-            },
-            {
-                name: "Undetermined",
-                cover: "https://image.onezol.com/img/R18.08.13.png"
+    const [categories, setCategories] = useState<ICategory[]>([]);
+    useEffect(() => {
+        (async () => {
+            const result: IResponse = await fetchCategories();
+            if (!result) {
+                return;
             }
-        ]
-    );
+            setCategories(result.data);
+        })()
+    }, [])
+    const fetchCategories = async () => {
+        const response: IResponse = await getCategories(4);
+        return response ? response.data : null;
+    }
     return (
         <div className={styles.wrapper}>
             <div className={styles.headline_wrapper}>

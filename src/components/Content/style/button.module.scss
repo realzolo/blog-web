@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+
+  .button {
+    border-radius: 2rem;
+    background: var(--zolo-colors-black-100);
+    padding: 0 4rem;
+
+    &:hover span {
+      transition: all .35s;
+      color: var(--zolo-colors-theme);
+    }
+
+    &:hover, &:active {
+      background: var(--zolo-colors-black-100) !important;
+    }
+  }
+}

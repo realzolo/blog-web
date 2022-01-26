@@ -1,7 +1,7 @@
 import {IUserAction, IUserState, UserActionType} from "../../../typings";
 
 const initialState: IUserState = {
-    userinfo: {nickname: "", username: ""}
+    user: {nickname: "", username: ""}
 }
 const UserReducer = (state: IUserState = initialState, action: IUserAction) => {
     const {type, payload} = action;
@@ -9,7 +9,7 @@ const UserReducer = (state: IUserState = initialState, action: IUserAction) => {
         case UserActionType.ADD_USER:
             return {
                 ...state,
-                userinfo: {...payload}
+                user: {...payload}
             }
         default:
             return state;

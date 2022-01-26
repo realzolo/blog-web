@@ -1,7 +1,7 @@
 import React, {PropsWithChildren, useState} from "react";
 import {useDispatch} from "react-redux";
 import {Button, Card, Form, Input, Message} from "@arco-design/web-react";
-import {login} from "../../net";
+import {login} from "../../net/fake";
 import {IResponse, IUserState, UserActionType} from "../../typings";
 import {HTTPStatusCode} from "../../constant/status-code";
 import styles from "./style/index.module.scss";

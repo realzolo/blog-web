@@ -3,7 +3,7 @@ import commonStyles from "./style/common.module.scss";
 import {Space} from "@arco-design/web-react";
 import {useEffect, useState} from "react";
 import {IResponse, ITime} from "../../typings";
-import {getTime} from "../../net";
+import {getTime} from "../../net/fake";
 
 const Timer = () => {
     const [time, setTime] = useState<ITime>({} as ITime);
@@ -32,7 +32,7 @@ const Timer = () => {
         </div>
     )
     return (
-        <Card title={titleElement}>
+        <Card title={titleElement} bordered={false}>
             <Space direction="vertical" style={{width: "100%"}}>
                 <div>
                     <span>今日已经过去 {time.hour_of_day} 小时</span>

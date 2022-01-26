@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Charts from "./Charts";
 import Stats from "./Stats";
-import {getStatsInfo} from "../../net";
+import {getStatsInfo} from "../../net/fake";
 import {IResponse, IStats} from "../../typings";
 import {Message} from "@arco-design/web-react";
 

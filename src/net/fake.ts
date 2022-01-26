@@ -1,13 +1,14 @@
-import {UserList} from "../mock/user";
 import {IResponse} from "../typings";
 import {HTTPStatusCode} from "../constant/status-code";
-import {stats_info} from "../mock/stats";
+import {userList} from "../mock/user";
+import {statsInfo} from "../mock/stats";
 import {articleList} from "../mock/article";
 import {time} from "../mock/time";
+import {categoryList} from "../mock/category";
 
 export const login = (username: string, password: string): Promise<any> => {
     return new Promise(((resolve, reject) => {
-        const r = UserList.filter(user => username === user.username && password === user.password);
+        const r = userList.filter(user => username === user.username && password === user.password);
         if (r.length > 0) {
             const res = {
                 data: {
@@ -34,7 +35,19 @@ export const getStatsInfo = (): Promise<any> => {
         const res = {
             data: {
                 code: HTTPStatusCode.SUCCESS,
-                data: stats_info,
+                data: statsInfo,
+                message: "成功!"
+            } as IResponse
+        };
+        resolve(res);
+    }))
+}
+export const getCategories = (count: number): Promise<any> => {
+    return new Promise(((resolve, reject) => {
+        const res = {
+            data: {
+                code: HTTPStatusCode.SUCCESS,
+                data: categoryList(count),
                 message: "成功!"
             } as IResponse
         };
@@ -42,12 +55,12 @@ export const getStatsInfo = (): Promise<any> => {
     }))
 }
 
-export const getArticles = (): Promise<any> => {
+export const getArticles = (count: number): Promise<any> => {
     return new Promise(((resolve, reject) => {
         const res = {
             data: {
                 code: HTTPStatusCode.SUCCESS,
-                data: articleList,
+                data: articleList(count),
                 message: "成功!"
             } as IResponse
         };

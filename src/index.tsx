@@ -6,12 +6,15 @@ import {store, persistor} from "./store";
 import "./style/global.css";
 import {PersistGate} from 'redux-persist/integration/react'
 import {BrowserRouter} from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 ReactDOM.render(
     <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
             <BrowserRouter>
-                <App/>
+                <ErrorBoundary>
+                    <App/>
+                </ErrorBoundary>
             </BrowserRouter>
         </PersistGate>
     </Provider>,

@@ -1,11 +1,26 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Message, Popconfirm, Space, Switch, Table} from "@arco-design/web-react";
-import {IArticle} from "../../typings";
+import {IArticle, IResponse} from "../../typings";
 import Editor from "./Editor";
+import {getArticles} from "../../net/fake";
 
 const Manage: React.FC = () => {
-    const [visible,setVisible] = useState(false);
-    const [curOpArticle,setCurOpArticle] = useState({} as IArticle);
+    const [articles, setArticles] = useState<IArticle[]>([]);
+    const [visible, setVisible] = useState(false);
+    const [curOpArticle, setCurOpArticle] = useState({} as IArticle);
+    useEffect(() => {
+        (async () => {
+            const result: IResponse = await fetchArticles();
+            if (!result) {
+                return;
+            }
+            setArticles(result.data);
+        })()
+    }, [])
+    const fetchArticles = async () => {
+        const response: IResponse = await getArticles(20);
+        return response ? response.data : null;
+    }
     // 编辑按钮操作
     const doModify = (record: IArticle) => {
         setVisible(true);
@@ -23,7 +38,7 @@ const Manage: React.FC = () => {
     // 改变状态
     const doChangeState = (record: IArticle) => {
         const {state} = record;
-        setCurOpArticle({...curOpArticle,state: !state});
+        setCurOpArticle({...curOpArticle, state: !state});
         Message.success("删除成功(假的)!");
     }
     // 删除
@@ -54,38 +69,9 @@ const Manage: React.FC = () => {
             )
         }
     ];
-
-    const data = [
-        {
-            aid: 1,
-            title: 'Jane Doe',
-            category: "23000",
-            intro: "",
-            cover: "",
-            content: "",
-            like_count: 324,
-            hit_count: 1234,
-            created_at: new Date().toLocaleTimeString(),
-            modified_at: new Date().toLocaleTimeString(),
-            state: true
-        },
-        {
-            aid: 2,
-            title: 'Jane ',
-            category: "2000",
-            intro: "",
-            cover: "",
-            content: "",
-            like_count: 24,
-            hit_count: 12,
-            created_at: new Date().toLocaleTimeString(),
-            modified_at: new Date().toLocaleTimeString(),
-            state: true
-        }
-    ];
     return (
         <div style={{margin: "1.5rem 0"}}>
-            <Table columns={columns} data={data} rowKey="aid"/>
+            <Table columns={columns} data={articles} rowKey="aid"/>
             <Editor visible={visible} callback={doCallback} data={curOpArticle} save={doSave}/>
         </div>
     )

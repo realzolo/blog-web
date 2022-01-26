@@ -11,7 +11,7 @@ import MailEditor from "./MailEditor";
 const Row = Grid.Row;
 const Col = Grid.Col;
 const Profile: React.FC = () => {
-    const userInfo = useSelector((state: ReduxState) => state.UserReducer.userinfo);
+    const user = useSelector((state: ReduxState) => state.UserReducer.user);
     const [v1, setV1] = useState<boolean>(false);
     const [v2, setV2] = useState<boolean>(false);
     const [v3, setV3] = useState<boolean>(false);
@@ -74,7 +74,7 @@ const Profile: React.FC = () => {
             <Row gutter={15}>
                 <Col span={7} className={styles.section_one}>
                     <div className={styles.section_one_content_wrapper}>
-                        <img src="https://fyun.cf/theme/cool/assets/images/user-info.jpg" alt=""/>
+                        <img src={user.background} alt=""/>
                         <Upload
                             // action={URL.UPLOAD.USER_AVATAR}
                             accept="image/*"
@@ -88,12 +88,12 @@ const Profile: React.FC = () => {
                             // className={styles.section_one_avatar_wrapper}
                         >
                             <Avatar>
-                                <img src={userInfo.avatar} alt=""/>
+                                <img src={user.avatar} alt=""/>
                             </Avatar>
                         </Upload>
-                        <h1>{userInfo.nickname}</h1>
-                        <span>用户名: {userInfo.username}</span>
-                        <span>邮箱: {userInfo.email}</span>
+                        <h1>{user.nickname}</h1>
+                        <span>用户名: {user.username}</span>
+                        <span>邮箱: {user.email}</span>
                         {/*<span></span>*/}
                     </div>
                 </Col>
@@ -126,10 +126,10 @@ const Profile: React.FC = () => {
                     </div>
                 </Col>
             </Row>
-            <UserInfoEditor visible={v1} callback={() => doCloseModal("v1")} data={userInfo}/>
-            <PasswordEditor visible={v2} callback={() => doCloseModal("v2")} data={userInfo}/>
-            <SocialAccountEditor visible={v3} callback={() => doCloseModal("v3")} data={userInfo}/>
-            <MailEditor visible={v4} callback={() => doCloseModal("v4")} data={userInfo}/>
+            <UserInfoEditor visible={v1} callback={() => doCloseModal("v1")} data={user}/>
+            <PasswordEditor visible={v2} callback={() => doCloseModal("v2")} data={user}/>
+            <SocialAccountEditor visible={v3} callback={() => doCloseModal("v3")} data={user}/>
+            <MailEditor visible={v4} callback={() => doCloseModal("v4")} data={user}/>
         </div>
     )
 }

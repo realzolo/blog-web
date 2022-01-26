@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.0.0-alpha.5",
     "@types/redux-persist": "^4.3.1"
   }
 }

@@ -2,21 +2,43 @@ import {Avatar, Card, Popover} from "@arco-design/web-react";
 import styles from "./style/profile.module.scss";
 import {useSelector} from "react-redux";
 import {ReduxState} from "../../store";
+import {useEffect, useState} from "react";
+import {IResponse, IStats} from "../../typings";
+import {getStatsInfo} from "../../net/fake";
+
 const Profile = () => {
-    const userInfo = useSelector((state: ReduxState) => state.UserReducer.userinfo);
+    const user = useSelector((state: ReduxState) => state.UserReducer.user);
+    const [statsInfo, setStatsInfo] = useState<IStats>({} as IStats);
     const avatar_frame = "https://image.onezol.com/img/avatar-frame.webp";
     const background = "https://blog.laoda.de/upload/2021/04/4f9eed27c4411415120b99d0f71430ff-3195b096d418411ca3c1fb412af947c5.jpeg";
+    useEffect(() => {
+        (async () => {
+            const result: IResponse = await fetchStatsInfo();
+            if (!result) {
+                return;
+            }
+            setStatsInfo(result.data);
+        })()
+    }, [])
+    const fetchStatsInfo = async () => {
+        const response: IResponse = await getStatsInfo();
+        return response ? response.data : null;
+    }
+    // const fetchStatsInfo = async () => {
+    //     const response: IResponse = await getStatsInfo();
+    //     return response ? response.data : null;
+    // }
     return (
-        <Card className={styles.wrapper} bodyStyle={{padding: 0}}>
+        <Card className={styles.wrapper} bodyStyle={{padding: 0}} bordered={false} title="profile">
             <img className={styles.background} src={background} alt=""/>
             <div className={styles.avatar_wrapper}>
-                <Avatar className={styles.avatar}><img src={userInfo.avatar} alt=""/></Avatar>
+                <Avatar className={styles.avatar}><img src={user.avatar} alt=""/></Avatar>
             </div>
             <div className={styles.avatar_frame_wrapper}>
                 <a href="/"><img src={avatar_frame} alt=""/></a>
             </div>
             <div className={styles.nickname_wrapper}>
-                <span>{userInfo.nickname}</span>
+                <span>{user.nickname}</span>
                 <svg d="1641487143888" className="icon" viewBox="0 0 1024 1024" version="1.1"
                      xmlns="http://www.w3.org/2000/svg" p-id="9296" width="20" height="20">
                     <path
@@ -75,15 +97,15 @@ const Profile = () => {
             <p className={styles.motto}>{"userInfo.motto"}👻👻👻</p>
             <ul className={styles.stats_wrapper}>
                 <li>
-                    <h4>999</h4>
+                    <h4>{statsInfo.total_xxx}</h4>
                     <span>文章数</span>
                 </li>
                 <li>
-                    <h4>999</h4>
+                    <h4>{statsInfo.total_likes}</h4>
                     <span>点赞数</span>
                 </li>
                 <li>
-                    <h4>999</h4>
+                    <h4>{statsInfo.total_hits}</h4>
                     <span>浏览数</span>
                 </li>
             </ul>
@@ -92,18 +114,19 @@ const Profile = () => {
                     position="top"
                     content={
                         <span style={{fontWeight: 500}}>
-                                WeChat: {userInfo.wechat}
+                                WeChat: {user.wechat}
                             </span>
                     }
                 >
                     <svg d="1641313639367" className="icon" viewBox="0 0 1024 1024" version="1.1"
-                         xmlns="http://www.w3.org/2000/svg" p-id="1230" width="20" height="20" style={{cursor: "pointer"}}>
+                         xmlns="http://www.w3.org/2000/svg" p-id="1230" width="20" height="20"
+                         style={{cursor: "pointer"}}>
                         <path
                             d="M695.296 346.112c11.776 0 23.552 1.024 34.816 2.048-31.232-146.432-187.904-254.976-366.592-254.976-199.68 0-363.52 136.192-363.52 308.736 0 99.84 54.272 181.76 145.408 245.248l-36.352 109.056L236.032 692.736c45.568 9.216 81.92 18.432 127.488 18.432 11.264 0 22.528-0.512 33.792-1.536-7.168-24.064-11.264-49.664-11.264-76.288 0.512-158.208 136.704-287.232 309.248-287.232zM497.664 240.64c31.232 0 56.32 25.088 56.32 56.32s-25.088 56.32-56.32 56.32-56.32-25.088-56.32-56.32 25.088-56.32 56.32-56.32zM243.2 353.792c-31.232 0-56.32-25.088-56.32-56.32s25.088-56.32 56.32-56.32 56.32 25.088 56.32 56.32-25.088 56.32-56.32 56.32zM1024.512 630.784c0-145.408-145.408-263.68-308.736-263.68-173.056 0-309.248 118.272-309.248 263.68s136.192 263.68 309.248 263.68c36.352 0 72.704-9.216 109.056-18.432l99.84 54.784-27.136-90.624c72.704-54.784 126.976-127.488 126.976-209.408z m-403.456-40.96c-22.016 0-39.936-17.92-39.936-39.936s17.92-39.936 39.936-39.936 39.936 17.92 39.936 39.936-17.92 39.936-39.936 39.936z m199.68 2.56c-22.016 0-39.936-17.92-39.936-39.936s17.92-39.936 39.936-39.936 39.936 17.92 39.936 39.936-17.92 39.936-39.936 39.936z"
                             fill="#69BB64" p-id="1231"></path>
                     </svg>
                 </Popover>
-                <a href={"//wpa.qq.com/msgrd?v=3&uin=" + userInfo.qq + "&site=qq&menu=yes"}>
+                <a href={"//wpa.qq.com/msgrd?v=3&uin=" + user.qq + "&site=qq&menu=yes"}>
                     <svg d="1641314030783" className="icon" viewBox="0 0 1024 1024" version="1.1"
                          xmlns="http://www.w3.org/2000/svg" p-id="11399" width="20" height="20">
                         <path
@@ -138,7 +161,7 @@ const Profile = () => {
                             fill="#EB1C26" p-id="11409"></path>
                     </svg>
                 </a>
-                <a href={"mailto:" + userInfo.email}>
+                <a href={"mailto:" + user.email}>
                     <svg d="1641314501700" className="icon" viewBox="0 0 1024 1024" version="1.1"
                          xmlns="http://www.w3.org/2000/svg" p-id="39296" width="20" height="20">
                         <path
@@ -152,7 +175,7 @@ const Profile = () => {
                             fill="#dc4835" p-id="39299"></path>
                     </svg>
                 </a>
-                <a href={"https://space.bilibili.com/" + userInfo.bilibili}>
+                <a href={"https://space.bilibili.com/" + user.bilibili}>
                     <svg d="1641314893236" className="icon" viewBox="0 0 1024 1024" version="1.1"
                          xmlns="http://www.w3.org/2000/svg" p-id="48128" width="20" height="20">
                         <path
@@ -160,7 +183,7 @@ const Profile = () => {
                             fill="#fb7299" p-id="48129"></path>
                     </svg>
                 </a>
-                <a href={"https://github.com/" + userInfo.github}>
+                <a href={"https://github.com/" + user.github}>
                     <svg d="1641314664643" className="icon" viewBox="0 0 1024 1024" version="1.1"
                          xmlns="http://www.w3.org/2000/svg" p-id="47207" width="18" height="18">
                         <path

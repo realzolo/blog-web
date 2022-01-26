@@ -1,21 +1,18 @@
-export const UserList = [
+import faker from "@faker-js/faker";
+import {IUser} from "../typings";
+
+export const userList: IUser[] = [
     {
         nickname: "Zolo",
         username: "zolo",
         password: "admin",
-        avatar: "https://image.onezol.com/avatar.png",
+        avatar: faker.internet.avatar(),
+        background: faker.random.randomImage(),
         email: "zolo@onezol.com",
         wechat: "Ci10010",
         qq: "83974934",
         bilibili: "realzolo",
         github: "github.com/realzolo",
-        create_at: "2022-01-10",
-    },
-    {
-        nickname: "Realzolo",
-        username: "realzolo",
-        password: "admin",
-        avatar: "https://image.onezol.com/avatar.png",
-        create_at: "2021-01-11",
+        create_at: faker.date.past().toLocaleDateString().replaceAll("/", "-"),
     }
 ]

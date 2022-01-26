@@ -1,4 +1,4 @@
-import {createStore, combineReducers, Store, AnyAction} from "redux";
+import {createStore, combineReducers} from "redux";
 import UserReducer from "./reducers/UserReducer";
 import {IUserState} from "../typings";
 import {persistStore, persistReducer} from 'redux-persist'

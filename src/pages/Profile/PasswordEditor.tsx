@@ -1,13 +1,13 @@
 import {Form, Input, Modal} from "@arco-design/web-react";
 import React, {useEffect} from "react";
-import {IUserInfo} from "../../typings";
+import {IUser} from "../../typings";
 
 const FormItem = Form.Item;
 
 interface IProps {
     visible: boolean,
     callback: () => void,
-    data: IUserInfo
+    data: IUser
 }
 
 const PasswordEditor: React.FC<IProps> = ({visible, callback, data}) => {

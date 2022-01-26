@@ -17,12 +17,12 @@ const Stats: React.FC<IProps> = ({data}) => {
                 <Col span={6}>
                     <Card title="访问数量" extra={<Tag color='#0fc6c2'>日</Tag>}>
                         <div style={{display: "flex", justifyContent: "space-between"}}>
-                            <span>{data.daily_visits}</span>
+                            <span>{data.daily_hits}</span>
                             <IconXiguaColor/>
                         </div>
                         <div style={{display: "flex", justifyContent: "space-between"}}>
                             <span>访问总数</span>
-                            <span>{data.total_visits}</span>
+                            <span>{data.total_hits}</span>
                         </div>
                     </Card>
                 </Col>

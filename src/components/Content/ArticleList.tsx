@@ -1,13 +1,17 @@
-import styles from "./style/article.module.scss";
-import {getCategoryIcon} from "../../utils/category-icon";
-import {useEffect, useState} from "react";
-import {IArticle, IResponse} from "../../typings";
-import {getArticles, login} from "../../net";
 import {Message} from "@arco-design/web-react";
+import {getCategoryIcon} from "../../utils/category-icon";
+import React, {useEffect, useState} from "react";
+import {IArticle, IResponse} from "../../typings";
+import {getArticles} from "../../net/fake";
+import styles from "./style/article.module.scss";
 
 // import LazyLoad from 'react-lazyload';
+interface IProps {
+    more: IArticle[],
+    setMoreBtnVisible: (v: boolean) => void
+}
 
-const ArticleList = () => {
+const ArticleList: React.FC<IProps> = ({more, setMoreBtnVisible}) => {
     const [articles, setArticles] = useState<IArticle[]>([]);
     useEffect(() => {
         (async () => {
@@ -19,11 +23,20 @@ const ArticleList = () => {
             setArticles(result.data);
         })()
     }, []);
+    useEffect(() => {
+        const newArr = articles.concat(more);
+        const nonRepeatArray = Array.from(new Set(newArr));
+        setArticles(nonRepeatArray)
+    }, [more])
+    // 根据文章数目觉得是否显示"更多按钮"
+    useEffect(() => {
+        setMoreBtnVisible(articles.length >= 6)
+    }, [articles.length])
     /**
      * 获取文章列表
      */
     const doFetchArticleList = async (): Promise<IResponse> => {
-        const response: IResponse = await getArticles();
+        const response: IResponse = await getArticles(6);
         return response ? response.data : null;
     }
     return (
@@ -48,7 +61,7 @@ const ArticleList = () => {
                 {
                     articles.map((article) => {
                         return (
-                            <li className={styles.article_item}>
+                            <li className={styles.article_item} key={article.aid}>
                                 <div className={styles.cover_wrapper}
                                      onClick={() => window.open(`/posts/${article.aid}`)}>
                                     <svg d="1641374652392" className="icon"

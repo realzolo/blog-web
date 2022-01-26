@@ -14,7 +14,7 @@ const Notice = () => {
         </div>
     )
     return(
-        <Card title={titleElement}>
+        <Card title={titleElement} bordered={false}>
             遇到想要了解的内容，可以多用右上角的【搜索】功能～
         </Card>
     )
