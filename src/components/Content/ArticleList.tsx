@@ -4,8 +4,10 @@ import React, {useEffect, useState} from "react";
 import {IArticle, IResponse} from "../../typings";
 import {getArticles} from "../../net/fake";
 import styles from "./style/article.module.scss";
+// import LazyLoad from "../LazyLoad";
+import lazyLoadImg from "../../asset/imgs/loading.gif";
+import {SimpleImg} from 'react-simple-img';
 
-// import LazyLoad from 'react-lazyload';
 interface IProps {
     more: IArticle[],
     setMoreBtnVisible: (v: boolean) => void
@@ -87,7 +89,8 @@ const ArticleList: React.FC<IProps> = ({more, setMoreBtnVisible}) => {
                                     {/*        src={lazyLoadImg} alt=""/>}*/}
                                     {/*    children={<img src={article.cover} alt="Cover"/>}*/}
                                     {/*/>*/}
-                                    <img src={article.cover} alt=""/>
+                                    {/*<img src={article.cover} alt=""/>*/}
+                                    <SimpleImg src={article.cover} placeholder={lazyLoadImg}/>
                                 </div>
                                 <div className={styles.metadata_wrapper}
                                      onClick={() => window.open(`/posts/${article.aid}`)}>
@@ -95,7 +98,6 @@ const ArticleList: React.FC<IProps> = ({more, setMoreBtnVisible}) => {
                                     <div className={styles.intro_wrapper}><p>{article.intro}</p></div>
                                     <div className={styles.stats_wrapper}>
                                         <div className={styles.stats}>
-                                            {/*<span>{new Date(article.created_at).toLocaleDateString().replaceAll("/", "-")}</span>*/}
                                             <span>{article.created_at}</span>
                                             <span>{article.hit_count}阅读</span>
                                             <span>{article.like_count}点赞</span>

@@ -30,6 +30,19 @@ export const login = (username: string, password: string): Promise<any> => {
         }
     }))
 }
+export const getUserInfo = (username: string): Promise<any> => {
+    const r = userList.filter(user => username === user.username);
+    return new Promise(((resolve, reject) => {
+        const res = {
+            data: {
+                code: HTTPStatusCode.SUCCESS,
+                data: r[0],
+                message: "成功!"
+            } as IResponse
+        };
+        resolve(res);
+    }))
+}
 export const getStatsInfo = (): Promise<any> => {
     return new Promise(((resolve, reject) => {
         const res = {

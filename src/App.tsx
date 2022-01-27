@@ -4,10 +4,10 @@ import Loading from "./components/Loading";
 import {routes} from "./router";
 
 function App() {
-    const _routes = useRoutes(routes);
+    const elements = useRoutes(routes);
     return (
         <Suspense fallback={<Loading/>}>
-            {_routes}
+            {elements}
         </Suspense>
     );
 }

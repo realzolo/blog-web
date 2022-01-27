@@ -1,33 +1,33 @@
 import {Avatar, Card, Popover} from "@arco-design/web-react";
 import styles from "./style/profile.module.scss";
-import {useSelector} from "react-redux";
-import {ReduxState} from "../../store";
 import {useEffect, useState} from "react";
-import {IResponse, IStats} from "../../typings";
-import {getStatsInfo} from "../../net/fake";
+import {IResponse, IStats, IUser} from "../../typings";
+import {getStatsInfo, getUserInfo} from "../../net/fake";
 
 const Profile = () => {
-    const user = useSelector((state: ReduxState) => state.UserReducer.user);
-    const [statsInfo, setStatsInfo] = useState<IStats>({} as IStats);
+    const [user, setUser] = useState<IUser>({} as IUser);
+    const [stats, setStats] = useState<IStats>({} as IStats);
     const avatar_frame = "https://image.onezol.com/img/avatar-frame.webp";
     const background = "https://blog.laoda.de/upload/2021/04/4f9eed27c4411415120b99d0f71430ff-3195b096d418411ca3c1fb412af947c5.jpeg";
     useEffect(() => {
         (async () => {
-            const result: IResponse = await fetchStatsInfo();
-            if (!result) {
-                return;
-            }
-            setStatsInfo(result.data);
+            const _user: IResponse = await fetchUserInfo();
+            const _stats: IResponse = await fetchStatsInfo();
+            // if ( null ) {
+            //     return;
+            // }
+            setUser(_user.data);
+            setStats(_stats.data);
         })()
     }, [])
+    const fetchUserInfo = async () => {
+        const response: IResponse = await getUserInfo("zolo");
+        return response ? response.data : null;
+    }
     const fetchStatsInfo = async () => {
         const response: IResponse = await getStatsInfo();
         return response ? response.data : null;
     }
-    // const fetchStatsInfo = async () => {
-    //     const response: IResponse = await getStatsInfo();
-    //     return response ? response.data : null;
-    // }
     return (
         <Card className={styles.wrapper} bodyStyle={{padding: 0}} bordered={false} title="profile">
             <img className={styles.background} src={background} alt=""/>
@@ -97,15 +97,15 @@ const Profile = () => {
             <p className={styles.motto}>{"userInfo.motto"}👻👻👻</p>
             <ul className={styles.stats_wrapper}>
                 <li>
-                    <h4>{statsInfo.total_xxx}</h4>
+                    <h4>{stats.total_xxx}</h4>
                     <span>文章数</span>
                 </li>
                 <li>
-                    <h4>{statsInfo.total_likes}</h4>
+                    <h4>{stats.total_likes}</h4>
                     <span>点赞数</span>
                 </li>
                 <li>
-                    <h4>{statsInfo.total_hits}</h4>
+                    <h4>{stats.total_hits}</h4>
                     <span>浏览数</span>
                 </li>
             </ul>
